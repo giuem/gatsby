@@ -529,7 +529,8 @@ jobs:
       - run:
           name: Rebuild packages for windows
           command: |
-            yarn --force
+            Remove-Item -Recurse -Force -Path "node_modules/sharp/"
+            yarn
       - run:
           name: Run tests
           command: yarn jest --ci --runInBand ((yarn jest --listTests) | Foreach-Object {$_ -replace '.*\\packages', 'packages'} | Foreach-Object {$_ -replace '\\', '/'} | circleci tests split --split-by=timings)
