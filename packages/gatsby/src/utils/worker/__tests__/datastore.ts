@@ -7,6 +7,16 @@ import { store } from "../../../redux"
 import { actions } from "../../../redux/actions"
 import { getDataStore } from "../../../datastore"
 
+jest.mock(`gatsby-telemetry`, () => {
+  return {
+    decorateEvent: jest.fn(),
+  }
+})
+
+jest.mock(`gatsby-cli/lib/reporter`, () => {
+  return {}
+})
+
 let worker: GatsbyTestWorkerPool | undefined
 
 beforeEach(() => {
